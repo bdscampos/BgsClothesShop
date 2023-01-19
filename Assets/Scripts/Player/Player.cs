@@ -12,6 +12,8 @@ public class Player : MonoBehaviour
     private Rigidbody2D rig;
 
     private bool isRunning;
+
+    public GameObject Inventory;
     
 
     private void Awake()
@@ -22,6 +24,7 @@ public class Player : MonoBehaviour
     void Start()
     {
         this.initialSpeed = Speed;
+        Inventory.SetActive(false);
     }
 
     
@@ -29,11 +32,24 @@ public class Player : MonoBehaviour
     {
         OnInput();
         OnRun();
+        OpenInventory();
     }
 
     void FixedUpdate()
     {
         OnMove();
+    }
+
+    private void OpenInventory()
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            Inventory.SetActive(true);
+        }
+        if (Input.GetKey(KeyCode.Escape))
+        {
+            Inventory.SetActive(false);
+        }
     }
 
     #region Movement
